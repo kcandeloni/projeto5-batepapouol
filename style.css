@@ -2,10 +2,13 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 .topo {
     width: 100%;
     height: 80px;
-    background-color: blueviolet;
 
     display: flex;
     justify-content: space-between;
@@ -16,20 +19,75 @@
 
 .mensagemArea {
     width: 100%;
-    height: 100%;
-    background-color: brown;
+    height: calc(100vh - 160px);
+    background-color: #e5e5e5;
+    /* overflow-y: scroll;*/
+    padding-top: 24px;
 }
 
 .msn {
     width: 100%;
-    background-color: blue;
+    margin: 2px auto;
+    border-radius: 2px;
+    padding: 8px;
+
+    background-color: #dcdcdc;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+
+    word-wrap: break-word;
 }
 
-input {
+.msn.msnUser {
+    background-color: #ffffff;
+}
+
+.msn.msnPrivate {
+    background-color: #FFDEDE;
+}
+
+.postArea {
     width: 100%;
     height: 80px;
-    background-color: aquamarine;
+
+    padding: 0 22px;
     position: absolute;
     left: 0;
     bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+textarea {
+    resize: none;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 26px;
+
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.postArea ion-icon {
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.topo ion-icon {
+    font-size: 40px;
+    cursor: pointer;
 }

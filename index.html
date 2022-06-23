@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
@@ -11,17 +14,28 @@
 <body>
     <div class="topo">
         <img src="/img/logo 1.svg">
-        <img src="/img/logo 1.svg">
+        <ion-icon onclick="scrollMenu();" name="people"></ion-icon>
     </div>
     
-    <div class="mensagemArea">
-        <div class="msn">teste</div>
-        <div class="msn">teste</div>
-        <div class="msn">teste</div>
-    </div>
+    <ul class="mensagemArea">
+        <li class="msn">teste</li>
+        <li class="msn msnPrivate">teste
+            sasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        </li>
+        <li class="msn msnUser">teste
+            sasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        </li>  
+    </ul>
     
-    <input type="text">
+    <div class="postArea">
+        <textarea>Escreva aqui...</textarea>
+        <ion-icon onclick="enviaMensagem();" name="paper-plane-outline"></ion-icon>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> 
+    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    -->  
     <script src="script.js"></script>
 </body>
 </html>
