@@ -91,7 +91,7 @@ function renderizarMensagens() {
 
   for (let i = 0; i < mensagens.length; i++) {
     ul.innerHTML += `
-        <li class="msn msnPrivate">${mensagens[i].text}
+        <li class="msn msnPrivate">${mensagens[i].name}  ${mensagens[i].text}
         </li>`;
   }
 }
