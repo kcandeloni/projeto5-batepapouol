@@ -18,22 +18,66 @@ const elementoQueQueroQueApareca = document.querySelector('.mensagem');
 elementoQueQueroQueApareca.scrollIntoView();
 */
 
-let nameUser = prompt("Informe sua Graça:");
+let nameUser;
+let nome;
 let mensagens;
+let idConect;
 
-/*Testando Cód baseado no TasteCamp*/
-
-
-function scrolllMenu () {
-    document.querySelector(".menuLateral").classList.toggle("visibility");
+function setName () {
+    nameUser = prompt("Informe sua Graça:");
+    nome = {
+        name: nameUser
+    }
+    getConect();
 }
+
+setName();
+
+
+function getConect () {
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", nome);
+
+    promise.then(testaConect);
+    promise.catch(validaEntrada);
+}
+
+function testaConect (status) {
+    console.log(status);
+    if(status.status === 400){
+        alert("Nome de usuário já est asendo utilziado. Tente outro...");
+        setName();
+    }
+    if(status.status === 200){
+        idConect = setInterval(mantemConect, 5000);
+    }
+}
+
+function mantemConect () {
+    console.log("mantendo ...")
+    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nome);
+    promise.then(conectOK);
+    promise.catch(desconecta);
+}
+
+function desconecta (erro) {
+    clearInterval(idConect);
+}
+
+function conectOK (status) {
+    console.log(status);
+}
+
+function validaEntrada (erro) {
+    console.log(erro);
+}
+
 
 function buscarMensagem () {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     promise.then(popularMensagem);
 }
 
-function popularReceitas(resposta) {
+function popularMensagem (resposta) {
     if (resposta.status === 200) {
         console.log("Deuuu boooom");
     }
@@ -47,7 +91,7 @@ function renderizarMensagens() {
 
   for (let i = 0; i < mensagens.length; i++) {
     ul.innerHTML += `
-        <li class="msn msnPrivate">${mensagens[i].message}
+        <li class="msn msnPrivate">${mensagens[i].text}
         </li>`;
   }
 }
@@ -56,13 +100,11 @@ function enviaMensagem () {
     const mensagem = document.querySelector(".newMensagem").value;
   
     const newMensagem = {
-    	from: nameUser,
-		/*to: "Todos",*/
-		text: mensagem,
-		type: "message",
-		time: "08:01:17"
-	};
-
+        from: nameUser,
+        to: "Todos",
+        text: mensagem,
+        type: "message" // ou "private_message" para o bônus
+    }
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", newMensagem);
 
     promise.then(buscarMensagem);
@@ -80,3 +122,13 @@ function enviaMensagem () {
         alert("Já existe uma receita com esse título!");
     }
 }   
+
+
+
+
+
+
+
+function scrolllMenu () {
+    document.querySelector(".menuLateral").classList.toggle("visibility");
+}
