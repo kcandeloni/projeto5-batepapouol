@@ -33,17 +33,16 @@ function setName () {
     }
     if(nameUser){
         login();
-    }else{console.log("Entrada Invalida!")}
+    }else{
+        console.log("Entrada Invalida!");
+        setName();
+    }
 }
 
 function login () {
     document.querySelector(".telaEntrada button").classList.add("closeTela");
     document.querySelector(".nameLogin").classList.add("closeTela");
     document.querySelector(".loader").classList.add("openTela");
-    document.querySelector(".telaEntrada").classList.add("someTela");
-    setTimeout(function(){
-        document.querySelector(".telaEntrada").classList.add("closeTela");
-    }, 4000);
     getConect();
 }
 
@@ -61,12 +60,19 @@ function getConect () {
 function testaConect (status) {
     console.log(status);
     if(status.status === 400){
-        console.log("Nome de usuário já esta sendo utilziado. Tente outro...");
-        setName();
+        desconecta();
     }
     if(status.status === 200){
+        buscarMensagem();
         idConect = setInterval(mantemConect, 5000);
-        
+        document.querySelector(".telaEntrada").classList.add("someTela");
+        setTimeout(function(){
+            document.querySelector(".telaEntrada").classList.add("closeTela");
+        }, 4000);
+    }
+    else {
+        console.log(status.status)
+        desconecta();
     }
 }
 
@@ -80,7 +86,6 @@ function mantemConect () {
 function desconecta (erro) {
     clearInterval(idConect);
     clearInterval(idMensagem);
-    alert(erro);
     window.location.reload();
 }
 
@@ -89,7 +94,8 @@ function conectOK (status) {
 }
 
 function validaEntrada (erro) {
-    console.log(erro);
+    alert("Nome em uso!\nInforme um nome diferete.");
+    desconecta();
 }
 
 function buscarMensagem () {
@@ -106,33 +112,46 @@ function popularMensagem (resposta) {
 }
 
 function renderizarMensagens() {
-  const ul = document.querySelector(".mensagemArea");
-  ul.innerHTML = "";
+    mensagens = mensagens.filter(function(elem){if(elem.type === "private_message" && elem.to !== nameUser){return false}return true});
+    const ul = document.querySelector(".mensagemArea");
+    ul.innerHTML = "";
 
-  for (let i = 0; i < mensagens.length; i++) {
-    ul.innerHTML += `
-        <li class="msn msnPrivate">${mensagens[i].from} ${mensagens[i].text}
-        </li>`;
-  }
+    for (let i = 0; i < mensagens.length; i++) {
+        if(mensagens[i].type === "status"){
+            ul.innerHTML += `
+            <li class="msn">${mensagens[i].from} ${mensagens[i].type} ${mensagens[i].text}
+            </li>`;
+        }else if(mensagens[i].type === "message"){
+            ul.innerHTML += `
+            <li class="msn msnUser">${mensagens[i].from} ${mensagens[i].text}
+            </li>`;
+        }else if(mensagens[i].type === "private_message"){
+            ul.innerHTML += `
+            <li class="msn msnPrivate">${mensagens[i].from} ${mensagens[i].text}
+            </li>`;
+        }
+    }
+    elementoQueQueroQueApareca = document.querySelector('.msn:last-child');
+    elementoQueQueroQueApareca.scrollIntoView();
 }
 
 function enviaMensagem () {
     const mensagem = document.querySelector(".newMensagem").value;
     document.querySelector(".newMensagem").value = "";
+    if(mensagem){
+        const newMensagem = {
+            from: nameUser,
+            to: "Todos",
+            text: mensagem,
+            type: "message" // ou "private_message" para o bônus
+        }
+        const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", newMensagem);
 
-    const newMensagem = {
-        from: nameUser,
-        to: "Todos",
-        text: mensagem,
-        type: "message" // ou "private_message" para o bônus
+        promise.then(buscarMensagem);
+        promise.catch(alertaErro);
     }
-    const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", newMensagem);
-
-    promise.then(buscarMensagem);
-    promise.catch(alertaErro);
-
-    //elementoQueQueroQueApareca = document.querySelector('.mensagemArea');
-    //elementoQueQueroQueApareca.scrollIntoView();
+    elementoQueQueroQueApareca = document.querySelector('.msn:last-child');
+    elementoQueQueroQueApareca.scrollIntoView();
 }
 
     function alertaErro(error) {
