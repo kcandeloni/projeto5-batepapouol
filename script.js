@@ -3,6 +3,8 @@ let nome;
 let mensagens;
 let idConect;
 let idMensagem;
+let toMsn = "Todos"
+let typeMsn = "message";
 
 let elementoQueQueroQueApareca;
 
@@ -34,8 +36,6 @@ function getConect () {
 
     idMensagem = setInterval(buscarMensagem, 3000);
 }
-
-
 
 function testaConect (status) {
     console.log(status);
@@ -121,9 +121,9 @@ function enviaMensagem () {
     if(mensagem){
         const newMensagem = {
             from: nameUser,
-            to: "Todos",
+            to: toMsn,
             text: mensagem,
-            type: "message" // ou "private_message" para o bônus
+            type: typeMsn // ou "private_message" para o bônus
         }
         const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", newMensagem);
 
@@ -146,6 +146,6 @@ function enviaMensagem () {
     }
 }   
 
-function scrolllMenu () {
-    document.querySelector(".menuLateral").classList.toggle("visibility");
+function scrollMenu () {
+    document.querySelector(".menu").classList.toggle("visibility");
 }

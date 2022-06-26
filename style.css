@@ -116,7 +116,7 @@ textarea {
   left: 0;
   background-color: #ffffff;
 
-  transition: all ease-in 3s;
+  /*transition: all ease-in 3s;*/
 }
 
 .topo img {
@@ -239,6 +239,7 @@ button{
 }
 
 .someTela {
+  transition: all ease-in 3s;
   opacity: 0;
 }
 
@@ -248,4 +249,71 @@ button{
 
 .openTela {
   display: flex;
+}
+
+.menu {
+  display: none;
+  width: 259px;
+  height: 100%;
+
+  word-wrap: break-word;
+
+  background-color: #ffffff;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+
+  padding: 0 20px;
+}
+
+.menu ion-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.tituloMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.checkIcon {
+  color: rgb(75, 236, 43);
+  font-weight: 700;
+}
+
+.buttonMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.buttonMenu ion-icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.visibility {
+  display: inline;
 }
