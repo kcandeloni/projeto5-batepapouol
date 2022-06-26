@@ -1,23 +1,3 @@
-/* axios
-post:
-https://mock-api.driven.com.br/api/v6/uol/participants
-https://mock-api.driven.com.br/api/v6/uol/status
-
-
-get:
-const promessa = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
-
-promessa.then(chegouDados); qaundo dos dados chegar, vai chamar a função (seta o paramelhod a função chamada com aresposta do servidor)
-function chegouDados (resposta) {
-    resposta.data // é o que importa pra gente agora
-}
-*/
-
-/*
-const elementoQueQueroQueApareca = document.querySelector('.mensagemArea');
-elementoQueQueroQueApareca.scrollIntoView();
-*/
-
 let nameUser;
 let nome;
 let mensagens;
@@ -119,15 +99,15 @@ function renderizarMensagens() {
     for (let i = 0; i < mensagens.length; i++) {
         if(mensagens[i].type === "status"){
             ul.innerHTML += `
-            <li class="msn">${mensagens[i].from} ${mensagens[i].type} ${mensagens[i].text}
+            <li class="msn"><spam class="colorTime">(${mensagens[i].time})</spam> <spam class="nameMsn">${mensagens[i].from}</spam> ${mensagens[i].text}
             </li>`;
         }else if(mensagens[i].type === "message"){
             ul.innerHTML += `
-            <li class="msn msnUser">${mensagens[i].from} ${mensagens[i].text}
+            <li class="msn msnUser"><spam class="colorTime">(${mensagens[i].time})</spam> <spam class="nameMsn">${mensagens[i].from}</spam> para <spam class="nameMsn">${mensagens[i].to}</spam>: ${mensagens[i].text}
             </li>`;
         }else if(mensagens[i].type === "private_message"){
             ul.innerHTML += `
-            <li class="msn msnPrivate">${mensagens[i].from} ${mensagens[i].text}
+            <li class="msn msnPrivate"><spam class="colorTime">(${mensagens[i].time})</spam> <spam class="nameMsn">${mensagens[i].from}</spam> reservadamente para <spam class="nameMsn">${mensagens[i].to}</spam>: ${mensagens[i].text}
             </li>`;
         }
     }
