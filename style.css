@@ -1,95 +1,236 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .topo {
-    width: 100%;
-    height: 15vh;
+  width: 100%;
+  height: 15vh;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    padding: 0 22px;
+  padding: 0 22px;
 }
 
 .mensagemArea {
-    width: 100%;
-    height: 70vh;
-    background-color: #e5e5e5;
-    overflow-y: scroll;
-    padding-bottom: 80px;
-    padding-top: 24px;
+  width: 100%;
+  height: 70vh;
+  background-color: #e5e5e5;
+  overflow-y: scroll;
+  padding-bottom: 80px;
+  padding-top: 24px;
 }
 
 .msn {
-    width: 100%;
-    margin: 2px auto;
-    border-radius: 2px;
-    padding: 8px;
+  width: 100%;
+  margin: 2px auto;
+  border-radius: 2px;
+  padding: 8px;
 
-    background-color: #dcdcdc;
+  background-color: #dcdcdc;
 
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .msn.msnUser {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .msn.msnPrivate {
-    background-color: #FFDEDE;
+  background-color: #FFDEDE;
 }
 
 .postArea {
-    width: 100%;
-    height: 15vh;
+  width: 100%;
+  height: 15vh;
 
-    padding: 0 22px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: #ffffff;
+  padding: 0 22px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: #ffffff;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
 }
 
 textarea {
-    resize: none;
-    outline: none;
-    border: none;
-    width: 100%;
-    height: 26px;
+  resize: none;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 26px;
 
-    font-family: 'Roboto';
-    font-style: italic;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    color: #000000;
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  color: #000000;
 }
 
 .postArea ion-icon {
-    font-size: 26px;
-    cursor: pointer;
+  font-size: 26px;
+  cursor: pointer;
 }
 
 .topo ion-icon {
-    font-size: 40px;
-    cursor: pointer;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.telaEntrada {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+
+  transition: all ease-in 3s;
+}
+
+.telaEntrada img {
+  width: 120px;
+  height: 92px;
+  margin-top: 72px;
+  margin-bottom: 94px;
+}
+
+.nameLogin {
+  text-align: center;
+  line-height: 45px;
+  
+  margin-bottom: 15px;
+  width: 261px;
+  height: 54px;
+
+  background: #FFFFFF;
+  border: 1px solid #D7D7D7;
+  border-radius: 4px;
+}
+
+.nameLogin::placeholder {
+  color: #AEAEAE;
+}
+
+button{
+  width: 109px;
+  height: 45px;
+
+  background: #E7E7E7;
+  border-radius: 9px;
+}
+
+.loader {
+  display: none;
+  color: #000000;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.someTela {
+  opacity: 0;
+}
+
+.closeTela {
+  display: none;
+}
+
+.openTela {
+  display: flex;
 }

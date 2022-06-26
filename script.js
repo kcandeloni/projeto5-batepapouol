@@ -14,7 +14,7 @@ function chegouDados (resposta) {
 */
 
 /*
-const elementoQueQueroQueApareca = document.querySelector('.mensagem');
+const elementoQueQueroQueApareca = document.querySelector('.mensagemArea');
 elementoQueQueroQueApareca.scrollIntoView();
 */
 
@@ -22,33 +22,51 @@ let nameUser;
 let nome;
 let mensagens;
 let idConect;
+let idMensagem;
+
+let elementoQueQueroQueApareca;
 
 function setName () {
-    nameUser = prompt("Informe sua Graça:");
+    nameUser = document.querySelector(".nameLogin").value;
     nome = {
         name: nameUser
     }
-    getConect();
+    if(nameUser){
+        login();
+    }else{console.log("Entrada Invalida!")}
 }
 
-setName();
-
+function login () {
+    document.querySelector(".telaEntrada button").classList.add("closeTela");
+    document.querySelector(".nameLogin").classList.add("closeTela");
+    document.querySelector(".loader").classList.add("openTela");
+    document.querySelector(".telaEntrada").classList.add("someTela");
+    setTimeout(function(){
+        document.querySelector(".telaEntrada").classList.add("closeTela");
+    }, 4000);
+    getConect();
+}
 
 function getConect () {
     const promise = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", nome);
 
     promise.then(testaConect);
     promise.catch(validaEntrada);
+
+    idMensagem = setInterval(buscarMensagem, 3000);
 }
+
+
 
 function testaConect (status) {
     console.log(status);
     if(status.status === 400){
-        alert("Nome de usuário já est asendo utilziado. Tente outro...");
+        console.log("Nome de usuário já esta sendo utilziado. Tente outro...");
         setName();
     }
     if(status.status === 200){
         idConect = setInterval(mantemConect, 5000);
+        
     }
 }
 
@@ -61,6 +79,9 @@ function mantemConect () {
 
 function desconecta (erro) {
     clearInterval(idConect);
+    clearInterval(idMensagem);
+    alert(erro);
+    window.location.reload();
 }
 
 function conectOK (status) {
@@ -70,7 +91,6 @@ function conectOK (status) {
 function validaEntrada (erro) {
     console.log(erro);
 }
-
 
 function buscarMensagem () {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
@@ -91,14 +111,15 @@ function renderizarMensagens() {
 
   for (let i = 0; i < mensagens.length; i++) {
     ul.innerHTML += `
-        <li class="msn msnPrivate">${mensagens[i].name} ${mensagens[i].text}
+        <li class="msn msnPrivate">${mensagens[i].from} ${mensagens[i].text}
         </li>`;
   }
 }
 
 function enviaMensagem () {
     const mensagem = document.querySelector(".newMensagem").value;
-  
+    document.querySelector(".newMensagem").value = "";
+
     const newMensagem = {
         from: nameUser,
         to: "Todos",
@@ -109,6 +130,9 @@ function enviaMensagem () {
 
     promise.then(buscarMensagem);
     promise.catch(alertaErro);
+
+    //elementoQueQueroQueApareca = document.querySelector('.mensagemArea');
+    //elementoQueQueroQueApareca.scrollIntoView();
 }
 
     function alertaErro(error) {
@@ -122,12 +146,6 @@ function enviaMensagem () {
         alert("Já existe uma receita com esse título!");
     }
 }   
-
-
-
-
-
-
 
 function scrolllMenu () {
     document.querySelector(".menuLateral").classList.toggle("visibility");
