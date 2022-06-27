@@ -148,10 +148,11 @@ function enviaMensagem () {
 function scrollMenu () {
     
     document.querySelector(".menu").classList.toggle("visibility");
+    document.querySelector(".fundoMenu").classList.toggle("visibility");
     if(document.querySelector(".menu").classList.contains("visibility")){
         toMsn = "Todos"
         typeMsn = "message";
-
+        selectType('Publico');
         const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
         promise
             .then(renderizaParticipantes)
@@ -163,28 +164,41 @@ function renderizaParticipantes(participants){
     console.log(participants.data);
     participants = participants.data.filter(function(elem){if(elem.name === nameUser){return false}return true});
     const ul = document.querySelector(".participantesMenu");
-    ul.innerHTML = `<li onClick="selectUser('Todos');">
-    <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+    ul.innerHTML = `<li class="offIcon checkIcon" onClick="selectUser('Todos');selectItem(this);">
+    <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon name="checkmark-sharp"></ion-icon>
 </li>`;
 
     for (let i = 0; i < participants.length; i++) {
-        ul.innerHTML += `<li onClick="selectUser('${participants[i].name}');">
-            <span><ion-icon name="people"></ion-icon><span>${participants[i].name}</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+        ul.innerHTML += `<li class="offIcon" onClick="selectUser('${participants[i].name}');selectItem(this);">
+            <span><ion-icon name="people"></ion-icon><span>${participants[i].name}</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>`;
     }
 }
 
-function selectUser (elem){
+function selectUser (elem) {
     toMsn = elem;
     if(elem === "Todos"){
         typeMsn = "message";
+        document.querySelector(".typeMsn li").classList.add("checkIcon");
+        document.querySelector(".typeMsn li:nth-child(2)").classList.remove("checkIcon");
     }
 }
 
 function selectType (elem) {
     if(elem === "privadoDanadinho" && toMsn !== "Todos"){
         typeMsn = "private_message";
-    }else{typeMsn = "message";}
+        document.querySelector(".typeMsn li").classList.remove("checkIcon");
+        document.querySelector(".typeMsn li:nth-child(2)").classList.add("checkIcon");
+    }else{
+        typeMsn = "message";
+        document.querySelector(".typeMsn li").classList.add("checkIcon");
+        document.querySelector(".typeMsn li:nth-child(2)").classList.remove("checkIcon");
+    }
+}
+
+function selectItem (elem) {
+    document.querySelector(".participantesMenu .checkIcon").classList.remove("checkIcon");
+    elem.classList.add("checkIcon");
 }
 
 function erroParticipantes(erro){

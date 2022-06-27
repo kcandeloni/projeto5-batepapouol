@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Bate Papo Uol</title>
 </head>
 <body>
     <div class="topo">
@@ -35,23 +35,24 @@
     <div class="menu">
         <div class="tituloMenu"><p>Escolha um contato para enviar mensagem: </p></div>
         <ul class="participantesMenu">
-            <li onclick="selectUser('Todos');">
-                <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+            <li class="checkIcon" onclick="selectUser('Todos');">
+                <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>
         </ul>
         <div class="tituloMenu"><p>Escolha a visibilidade: </p></div>
         <ul class="typeMsn">
-            <li onclick="selectType('publico');">
-                <span><ion-icon name="lock-open"></ion-icon></ion-icon><span>Público</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+            <li class="offIcon checkIcon" onclick="selectType('publico');">
+                <span><ion-icon name="lock-open"></ion-icon></ion-icon><span>Público</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>
-            <li onclick="selectType('privadoDanadinho');">
-                <span><ion-icon name="lock-closed"></ion-icon><span>Reservadamente</span></span>
+            <li class="offIcon" onclick="selectType('privadoDanadinho');">
+                <span><ion-icon name="lock-closed"></ion-icon><span>Reservadamente</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>
         </ul>
         <div class="buttonMenu">
             <ion-icon onclick="scrollMenu();" name="arrow-undo-circle"></ion-icon><ion-icon onclick="desconecta();" name="exit-outline"></ion-icon>
         </div>
     </div>
+    <div class="fundoMenu"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
