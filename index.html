@@ -35,22 +35,16 @@
     <div class="menu">
         <div class="tituloMenu"><p>Escolha um contato para enviar mensagem: </p></div>
         <ul class="participantesMenu">
-            <li>
+            <li onclick="selectUser('Todos');">
                 <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
-            </li>
-            <li>
-                <span><ion-icon name="person-circle"></ion-icon></ion-icon><span>Todos</span></span>
-            </li>
-            <li>
-                <span><ion-icon name="person-circle"></ion-icon></ion-icon><span>Todos</span></span>
             </li>
         </ul>
         <div class="tituloMenu"><p>Escolha a visibilidade: </p></div>
         <ul class="typeMsn">
-            <li>
-            <span><ion-icon name="lock-open"></ion-icon></ion-icon><span>Público</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+            <li onclick="selectType('publico');">
+                <span><ion-icon name="lock-open"></ion-icon></ion-icon><span>Público</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
             </li>
-            <li>
+            <li onclick="selectType('privadoDanadinho');">
                 <span><ion-icon name="lock-closed"></ion-icon><span>Reservadamente</span></span>
             </li>
         </ul>

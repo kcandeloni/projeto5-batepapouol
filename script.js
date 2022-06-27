@@ -17,7 +17,6 @@ function setName () {
         login();
     }else{
         console.log("Entrada Invalida!");
-        setName();
     }
 }
 
@@ -92,7 +91,7 @@ function popularMensagem (resposta) {
 }
 
 function renderizarMensagens() {
-    mensagens = mensagens.filter(function(elem){if(elem.type === "private_message" && elem.to !== nameUser){return false}return true});
+    mensagens = mensagens.filter(function(elem){if(elem.type === "private_message" && elem.to !== nameUser && elem.from !== nameUser){return false}return true});
     const ul = document.querySelector(".mensagemArea");
     ul.innerHTML = "";
 
@@ -147,5 +146,47 @@ function enviaMensagem () {
 }   
 
 function scrollMenu () {
+    
     document.querySelector(".menu").classList.toggle("visibility");
+    if(document.querySelector(".menu").classList.contains("visibility")){
+        toMsn = "Todos"
+        typeMsn = "message";
+
+        const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+        promise
+            .then(renderizaParticipantes)
+            .catch(erroParticipantes);
+    }else{console.log("não entrei nos parcipantes")}
+}
+
+function renderizaParticipantes(participants){
+    console.log(participants.data);
+    participants = participants.data.filter(function(elem){if(elem.name === nameUser){return false}return true});
+    const ul = document.querySelector(".participantesMenu");
+    ul.innerHTML = `<li onClick="selectUser('Todos');">
+    <span><ion-icon name="people"></ion-icon><span>Todos</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+</li>`;
+
+    for (let i = 0; i < participants.length; i++) {
+        ul.innerHTML += `<li onClick="selectUser('${participants[i].name}');">
+            <span><ion-icon name="people"></ion-icon><span>${participants[i].name}</span></span><ion-icon class="checkIcon" name="checkmark-sharp"></ion-icon>
+            </li>`;
+    }
+}
+
+function selectUser (elem){
+    toMsn = elem;
+    if(elem === "Todos"){
+        typeMsn = "message";
+    }
+}
+
+function selectType (elem) {
+    if(elem === "privadoDanadinho" && toMsn !== "Todos"){
+        typeMsn = "private_message";
+    }else{typeMsn = "message";}
+}
+
+function erroParticipantes(erro){
+    console.log("erro participantes"+ erro);
 }
