@@ -44,7 +44,7 @@
             <li class="offIcon checkIcon" onclick="selectType('publico');">
                 <span><ion-icon name="lock-open"></ion-icon></ion-icon><span>Público</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>
-            <li class="offIcon" onclick="selectType('privadoDanadinho');">
+            <li data-identifier="visibility" class="offIcon" onclick="selectType('privadoDanadinho');">
                 <span><ion-icon name="lock-closed"></ion-icon><span>Reservadamente</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>
         </ul>
@@ -52,7 +52,7 @@
             <ion-icon onclick="scrollMenu();" name="arrow-undo-circle"></ion-icon><ion-icon onclick="desconecta();" name="exit-outline"></ion-icon>
         </div>
     </div>
-    <div class="fundoMenu"></div>
+    <div class="fundoMenu" onclick="scrollMenu();"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

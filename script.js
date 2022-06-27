@@ -3,6 +3,7 @@ let nome;
 let mensagens;
 let idConect;
 let idMensagem;
+let idParticipantes;
 let toMsn = "Todos"
 let typeMsn = "message";
 
@@ -65,6 +66,7 @@ function mantemConect () {
 function desconecta (erro) {
     clearInterval(idConect);
     clearInterval(idMensagem);
+    clearInterval(idParticipantes);
     window.location.reload();
 }
 
@@ -106,7 +108,7 @@ function renderizarMensagens() {
             </li>`;
         }else if(mensagens[i].type === "private_message"){
             ul.innerHTML += `
-            <li class="msn msnPrivate"><spam class="colorTime">(${mensagens[i].time})</spam> <spam class="nameMsn">${mensagens[i].from}</spam> reservadamente para <spam class="nameMsn">${mensagens[i].to}</spam>: ${mensagens[i].text}
+            <li data-identifier="visibility" class="msn msnPrivate"><spam class="colorTime">(${mensagens[i].time})</spam> <spam class="nameMsn">${mensagens[i].from}</spam> reservadamente para <spam class="nameMsn">${mensagens[i].to}</spam>: ${mensagens[i].text}
             </li>`;
         }
     }
@@ -135,13 +137,13 @@ function enviaMensagem () {
 
     function alertaErro(error) {
     if (error.response.status === 404) {
-        alert("Não foi encontrado!");
+        alert(error.response.status);
     }
     if (error.response.status === 422) {
-        alert("Verique todos os campos da receita!");
+        alert(error.response.status);
     }
       if (error.response.status === 409) {
-        alert("Já existe uma receita com esse título!");
+        alert(error.response.status);
     }
 }   
 
@@ -150,14 +152,19 @@ function scrollMenu () {
     document.querySelector(".menu").classList.toggle("visibility");
     document.querySelector(".fundoMenu").classList.toggle("visibility");
     if(document.querySelector(".menu").classList.contains("visibility")){
-        toMsn = "Todos"
-        typeMsn = "message";
-        selectType('Publico');
-        const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
-        promise
-            .then(renderizaParticipantes)
-            .catch(erroParticipantes);
-    }else{console.log("não entrei nos parcipantes")}
+        idParticipantes = setInterval(getParticipantes, 10000);
+        getParticipantes();
+    }else{console.log("não entrei nos parcipantes"); clearInterval(idParticipantes);}
+}
+
+function getParticipantes () {
+    toMsn = "Todos"
+    typeMsn = "message";
+    selectType('Publico');
+    const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+    promise
+        .then(renderizaParticipantes)
+        .catch(erroParticipantes);
 }
 
 function renderizaParticipantes(participants){
@@ -169,7 +176,7 @@ function renderizaParticipantes(participants){
 </li>`;
 
     for (let i = 0; i < participants.length; i++) {
-        ul.innerHTML += `<li class="offIcon" onClick="selectUser('${participants[i].name}');selectItem(this);">
+        ul.innerHTML += `<li data-identifier="participant" class="offIcon" onClick="selectUser('${participants[i].name}');selectItem(this);">
             <span><ion-icon name="people"></ion-icon><span>${participants[i].name}</span></span><ion-icon name="checkmark-sharp"></ion-icon>
             </li>`;
     }
@@ -185,7 +192,7 @@ function selectUser (elem) {
 }
 
 function selectType (elem) {
-    if(elem === "privadoDanadinho" && toMsn !== "Todos"){
+    if(elem === "privadoDanadinho" && toMsn !== "Todos"){// Não quer enviar uma mensagem privada pra Todos, neh?
         typeMsn = "private_message";
         document.querySelector(".typeMsn li").classList.remove("checkIcon");
         document.querySelector(".typeMsn li:nth-child(2)").classList.add("checkIcon");
@@ -204,3 +211,19 @@ function selectItem (elem) {
 function erroParticipantes(erro){
     console.log("erro participantes"+ erro);
 }
+
+let enterMensagem = document.querySelector(".newMensagem");
+enterMensagem.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+       event.preventDefault();
+        enviaMensagem();
+   }
+});
+
+let enterNome = document.querySelector(".nameLogin");
+enterNome.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+       event.preventDefault();
+        setName();
+   }
+});

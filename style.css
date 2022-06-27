@@ -154,6 +154,7 @@ button{
 
   background: #E7E7E7;
   border-radius: 9px;
+  border: none;
 }
 
 .loader {
@@ -324,12 +325,13 @@ span {
 
 .participantesMenu {
   overflow-y: scroll;
-  height: 60%;
+  height: 45%;
   word-break: break-all;
 }
 
 .fundoMenu {
   display: none;
+  cursor: pointer;
 
   width: 100%;
   height: 100%;
