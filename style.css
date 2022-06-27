@@ -253,7 +253,6 @@ button{
 }
 
 .menu {
-  display: none;
   width: 259px;
   height: 100%;
 
@@ -263,7 +262,7 @@ button{
 
   position: absolute;
   top: 0;
-  right: 0;
+  right: -259px;
   z-index: 2;
 
   font-family: 'Roboto';
@@ -274,6 +273,11 @@ button{
   color: #000000;
 
   padding: 0 20px;
+  transition: all 300ms linear;;
+}
+
+.mostraMenu{
+  right: 0;
 }
 
 .menu ion-icon {

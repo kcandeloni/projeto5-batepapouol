@@ -149,9 +149,9 @@ function enviaMensagem () {
 
 function scrollMenu () {
     
-    document.querySelector(".menu").classList.toggle("visibility");
+    document.querySelector(".menu").classList.toggle("mostraMenu");
     document.querySelector(".fundoMenu").classList.toggle("visibility");
-    if(document.querySelector(".menu").classList.contains("visibility")){
+    if(document.querySelector(".menu").classList.contains("mostraMenu")){
         idParticipantes = setInterval(getParticipantes, 10000);
         getParticipantes();
     }else{console.log("não entrei nos parcipantes"); clearInterval(idParticipantes);}
