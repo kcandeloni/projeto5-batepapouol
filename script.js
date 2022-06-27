@@ -154,7 +154,17 @@ function scrollMenu () {
     if(document.querySelector(".menu").classList.contains("mostraMenu")){
         idParticipantes = setInterval(getParticipantes, 10000);
         getParticipantes();
-    }else{console.log("não entrei nos parcipantes"); clearInterval(idParticipantes);}
+    }else{
+        console.log("não entrei nos parcipantes");
+        clearInterval(idParticipantes);
+        let tempTo = document.querySelector(".toMensagem p")
+        if(typeMsn === "message"){
+            tempTo.innerHTML = `Enviando para ${toMsn}`;
+        }
+        else {
+            tempTo.innerHTML = `Enviando para ${toMsn} (reservadaemnte)`;
+        }
+    }
 }
 
 function getParticipantes () {

@@ -238,6 +238,18 @@ button{
     transform: rotate(360deg);
   }
 }
+.toMensagem {
+  display: flex;
+  flex-direction: column;
+  justify-content:space-around;
+
+  height: 80px;
+}
+
+.toMensagem > p{
+  color: #aaaaaa;
+  font-size: 14px;
+}
 
 .someTela {
   transition: all ease-in 3s;
@@ -260,7 +272,7 @@ button{
 
   background-color: #ffffff;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   right: -259px;
   z-index: 2;
